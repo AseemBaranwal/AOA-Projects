@@ -1,4 +1,6 @@
-#include <bits/stdc++.h>
+#include<vector>
+#include<map>
+#include<iostream>
 using namespace std;
 
 vector<int> maximumHousesStrategy1(int n, vector<vector<int>> &houseAvailability){
@@ -36,10 +38,10 @@ vector<int> maximumHousesStrategy2(int n, vector<vector<int>> &houseAvailability
 
     // We would need to perform sorting using custom sorting operation keeping in mind that sorting will change the order of houses
     // Hence using a hashmap to index the houses with correct index
-    map<vector<int>, int> originalIndex;
-    int i = 1;
-    for(auto &v: houseAvailability){
-        originalIndex[v] = i++;
+
+    // Correcting this for testcase {{1,2}, {1,2}}
+    for(int i = 0; i < m; i++){
+        houseAvailability[i].push_back(i+1);
     }
 
     // Sorting the array using custom sort function defined above
@@ -49,11 +51,11 @@ vector<int> maximumHousesStrategy2(int n, vector<vector<int>> &houseAvailability
     /* +++++++++++ HASHMAP THOUGHT TO BE ANALYZED AND IMPLEMENTED ++++++++++++++ */
 
     vector<int> res;
-    i = 0;
+    int i = 0;
     int lastAvailableDay = n;
     while(i < m){
         if(lastAvailableDay <= houseAvailability[i][1] and lastAvailableDay >= houseAvailability[i][0]){
-            res.push_back(originalIndex[houseAvailability[i]]);
+            res.push_back(houseAvailability[i][2]);
 
             // Updating the last available day after considering first day into consideration
             lastAvailableDay = min(houseAvailability[i][1], lastAvailableDay) - 1;
