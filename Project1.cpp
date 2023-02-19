@@ -28,7 +28,7 @@ vector<int> maximumHousesStrategy1(int n, vector<vector<int>> &houseAvailability
 // Custom Sort function for the strategy 2
 bool sortDescending(const vector<int> &v1, const vector<int> &v2){
     if(v1[0] == v2[0])
-        return v1[1] < v2[1];
+        return v1[1] > v2[1];
     return v1[0] > v2[0];
 }
 
@@ -54,7 +54,7 @@ vector<int> maximumHousesStrategy2(int n, vector<vector<int>> &houseAvailability
     int i = 0;
     int lastAvailableDay = n;
     while(i < m){
-        if(lastAvailableDay <= houseAvailability[i][1] and lastAvailableDay >= houseAvailability[i][0]){
+        if(lastAvailableDay >= houseAvailability[i][0] ){
             res.push_back(houseAvailability[i][2]);
 
             // Updating the last available day after considering first day into consideration
@@ -66,9 +66,15 @@ vector<int> maximumHousesStrategy2(int n, vector<vector<int>> &houseAvailability
         i++;
     }
 
+
+
     // Finally sorting the resultant index array for sequential way
     sort(res.begin(), res.end());
     return res;
+}
+
+vector<int> maximumHousesStrategy3(int n, vector<vector<int>> &houseAvailability) {
+
 }
 
 int main() {
