@@ -34,6 +34,20 @@ public:
     }
 };
 
+// Custom Sort function for the strategy 4
+class sortSmallestEndDay{
+public:
+    bool operator() (vector<int> &v1, vector<int> &v2){
+        // First index signifies the start date, second index signifies the end date
+        // The third index signifies the index at which the particular house appears in original array
+
+        // sorted based on the smallest ending times and then indices
+        if(v1[1] == v2[1])
+            return v1[2] > v2[2];
+        return v1[1] > v2[1];
+    }
+};
+
 vector<int> maximumHousesStrategy1(int n, vector<vector<int>> &houseAvailability) {
     // The function sorts the houses in increasing order of their start times and gives an output accordingly
     // Given that the houses are already sorted according to their start dates so no sorting is required
@@ -137,6 +151,49 @@ vector<int> maximumHousesStrategy3(int n, vector<vector<int>> &houseAvailability
     return res;
 }
 
+vector<int> maximumHousesStrategy4(int n, vector<vector<int>> &houseAvailability) {
+    // The function gets all the houses who have an availability at a given day and then selects the house
+    // having the minimum Ending time
+
+    // Using indexes to keep track of duplicated testcase {{1,2}, {1,2}}
+    for(int i = 0; i < (int)houseAvailability.size(); i++){
+        houseAvailability[i].push_back(i+1);
+    }
+
+    // minHeap
+    priority_queue<vector<int>, vector<vector<int>>, sortSmallestEndDay> pq;
+
+    // Variables to keep track of the last executed job and the resultant answer
+    int idx = 0;
+    vector<int> res;
+
+    for(int currentDay = 1; currentDay <= n; currentDay++){
+
+        // Inserting all houses into the priority queue which have an availability at a given day
+        while(idx < houseAvailability.size() and houseAvailability[idx][0] <= currentDay){
+            pq.push(houseAvailability[idx]);
+            idx++;
+        }
+
+        // Removing all the houses whose end day is less than the current day
+        while(!pq.empty() and pq.top()[1] < currentDay)
+            pq.pop();
+
+        // If all jobs are finished for the current day, hop on to the next day
+        if(pq.empty()) continue;
+
+        // inserting the first job with the latest time which comes from the priority queue using MaxHeap
+        res.push_back(pq.top()[2]);
+
+        // Removing the current house with maximum start time from the queue
+        pq.pop();
+    }
+
+    // Finally sorting the resultant index array for sequential way
+    sort(res.begin(), res.end());
+    return res;
+}
+
 int main() {
     // Taking user input for availability of painter and the total number of houses
     int n = 9, m = 9;
@@ -171,6 +228,13 @@ int main() {
     // Result of strategy 3 below
     res = maximumHousesStrategy3(n, houseAvailability);
     cout << "Indexes returned by strategy 3: ";
+    for (int &re: res)
+        cout << re << " ";
+    cout << endl;
+
+    // Result of strategy 4 below
+    res = maximumHousesStrategy4(n, houseAvailability);
+    cout << "Indexes returned by strategy 4: ";
     for (int &re: res)
         cout << re << " ";
     cout << endl;
