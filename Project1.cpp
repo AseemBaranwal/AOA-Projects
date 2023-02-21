@@ -6,6 +6,18 @@
 
 using namespace std;
 
+// Custom Sort function for the strategy 2
+class sortLatestStartDay{
+public:
+    bool operator ()(vector<int> &v1, vector<int> &v2){
+        // Based on first part descending and second part ascending
+        // First part signifies the start tine of a job and the second part signifies the index of it
+        if(v1[0] == v2[0])
+            return v1[1] > v2[1];
+        return v1[0] < v2[0];
+    }
+};
+
 vector<int> maximumHousesStrategy1(int n, vector<vector<int>> &houseAvailability){
     // The function sorts the houses in increasing order of their start times and gives an output accordingly
     // Given that the houses are already sorted according to their start dates so no sorting is required
@@ -28,18 +40,6 @@ vector<int> maximumHousesStrategy1(int n, vector<vector<int>> &houseAvailability
     return res;
 }
 
-// Custom Sort function for the strategy 2
-class sortDescending{
-public:
-    bool operator ()(vector<int> &v1, vector<int> &v2){
-        // Based on first part descending and second part ascending
-        // First part signifies the start tine of a job and the second part signifies the index of it
-        if(v1[0] == v2[0])
-            return v1[1] > v2[1];
-        return v1[0] < v2[0];
-    }
-};
-
 vector<int> maximumHousesStrategy2(int n, vector<vector<int>> &houseAvailability) {
     // The function selects the first house available to be painted that day having the maximum start time
 
@@ -48,21 +48,21 @@ vector<int> maximumHousesStrategy2(int n, vector<vector<int>> &houseAvailability
         houseAvailability[i].push_back(i+1);
     }
 
-    priority_queue<vector<int>, vector<vector<int>>, sortDescending> pq;
+    priority_queue<vector<int>, vector<vector<int>>, sortLatestStartDay> pq;
 
     // Variables to keep track of last executed job and resultant answer
     int idx = 0;
     vector<int> res;
-    for(int i = 1; i <= n; i++){
+    for(int currentDay = 1; currentDay <= n; currentDay++){
 
         // Inserting all houses into the priority queue which have an availability at a given day
-        while(idx < houseAvailability.size() and houseAvailability[idx][0] <= i){
+        while(idx < houseAvailability.size() and houseAvailability[idx][0] <= currentDay){
             pq.push({houseAvailability[idx][0], houseAvailability[idx][2]});
             idx++;
         }
 
         // Removing all the houses whose end day is less than the current day
-        while(!pq.empty() and houseAvailability[pq.top()[1] - 1][1] < i)
+        while(!pq.empty() and houseAvailability[pq.top()[1] - 1][1] < currentDay)
             pq.pop();
 
         // If all jobs are finished for the current day, hop on to the next day
