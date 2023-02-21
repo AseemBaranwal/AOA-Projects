@@ -196,20 +196,19 @@ vector<int> maximumHousesStrategy4(int n, vector<vector<int>> &houseAvailability
 
 int main() {
     // Taking user input for availability of painter and the total number of houses
-    int n = 9, m = 9;
-//    cout << "Enter the value of painter Availability: "; cin >> n;
-//    cout << "Enter the number of houses present: "; cin >> m;
+    int n, m;
+    cout << "Enter the value of painter Availability: "; cin >> n;
+    cout << "Enter the number of houses present: "; cin >> m;
 
     // Taking user input for the availability times of houses when they can be painted
-//    cout << "Enter the start and end house availability paint dates in each line: " << endl;
+    cout << "Enter the start and end house availability paint dates in each line: " << endl;
     vector<vector<int>> houseAvailability(m, vector<int> (2));
     houseAvailability = {{1,10},{1,7}, {1,8}, {2,3}, {2,4}, {2,8}, {3,4}, {4, 5}, {5, 6}};
 
-    /* Uncomment it after code completion
+//    Uncomment code below after code completion
     for(int i = 0; i < m; i++) {
         cin >> houseAvailability[i][0] >> houseAvailability[i][1];
     }
-    */
 
     // Result of strategy 1 below
     vector<int> res = maximumHousesStrategy1(n, houseAvailability);
@@ -238,5 +237,7 @@ int main() {
     for (int &re: res)
         cout << re << " ";
     cout << endl;
+
+    cout << "Correct Greedy Strategy is Strategy 4";
     return 0;
 }
