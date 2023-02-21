@@ -1,6 +1,9 @@
-#include<vector>
-#include<map>
-#include<iostream>
+#include <vector>
+#include <map>
+#include <iostream>
+#include <algorithm>
+#include <queue>
+
 using namespace std;
 
 vector<int> maximumHousesStrategy1(int n, vector<vector<int>> &houseAvailability){
@@ -26,67 +29,67 @@ vector<int> maximumHousesStrategy1(int n, vector<vector<int>> &houseAvailability
 }
 
 // Custom Sort function for the strategy 2
-bool sortDescending(const vector<int> &v1, const vector<int> &v2){
-    if(v1[0] == v2[0])
-        return v1[1] > v2[1];
-    return v1[0] > v2[0];
-}
+class sortDescending{
+public:
+    bool operator ()(vector<int> &v1, vector<int> &v2){
+        // Based on first part descending and second part ascending
+        // First part signifies the start tine of a job and the second part signifies the index of it
+        if(v1[0] == v2[0])
+            return v1[1] > v2[1];
+        return v1[0] < v2[0];
+    }
+};
 
 vector<int> maximumHousesStrategy2(int n, vector<vector<int>> &houseAvailability) {
-    // The function sorts the houses in decreasing order of their end times and gives an output accordingly
-    int m = (int)houseAvailability.size();
+    // The function selects the first house available to be painted that day having the maximum start time
 
-    // We would need to perform sorting using custom sorting operation keeping in mind that sorting will change the order of houses
-    // Hence using a hashmap to index the houses with correct index
-
-    // Correcting this for testcase {{1,2}, {1,2}}
-    for(int i = 0; i < m; i++){
+    // Using indexes to keep track of duplicated testcase {{1,2}, {1,2}}
+    for(int i = 0; i < (int)houseAvailability.size(); i++){
         houseAvailability[i].push_back(i+1);
     }
 
-    // Sorting the array using custom sort function defined above
-    sort(houseAvailability.begin(), houseAvailability.end(), sortDescending);
+    priority_queue<vector<int>, vector<vector<int>>, sortDescending> pq;
 
-    /* ====================== WE COULD USE A HASHMAP TO STORE WHAT DAYS HAS THE GUY WORKED TO CHECK EVERY DAY =============== */
-    /* +++++++++++ HASHMAP THOUGHT TO BE ANALYZED AND IMPLEMENTED ++++++++++++++ */
-
+    // Variables to keep track of last executed job and resultant answer
+    int idx = 0;
     vector<int> res;
-    int i = 0;
-    int lastAvailableDay = n;
-    while(i < m){
-        if(lastAvailableDay >= houseAvailability[i][0] ){
-            res.push_back(houseAvailability[i][2]);
+    for(int i = 1; i <= n; i++){
 
-            // Updating the last available day after considering first day into consideration
-            lastAvailableDay = min(houseAvailability[i][1], lastAvailableDay) - 1;
-
-            // if the available days for the painter are over, they can no longer paint any more houses and hence we end the loop.
-            if(lastAvailableDay < 1) break;
+        // Inserting all houses into the priority queue which have an availability at a given day
+        while(idx < houseAvailability.size() and houseAvailability[idx][0] <= i){
+            pq.push({houseAvailability[idx][0], houseAvailability[idx][2]});
+            idx++;
         }
-        i++;
+
+        // Removing all the houses whose end day is less than the current day
+        while(!pq.empty() and houseAvailability[pq.top()[1] - 1][1] < i)
+            pq.pop();
+
+        // If all jobs are finished for the current day, hop on to the next day
+        if(pq.empty()) continue;
+
+        // inserting the first job with the latest time which comes from the priority queue using MaxHeap
+        res.push_back(pq.top()[1]);
+
+        // Removing the current house with maximum start time from the queue
+        pq.pop();
     }
-
-
 
     // Finally sorting the resultant index array for sequential way
     sort(res.begin(), res.end());
     return res;
 }
 
-vector<int> maximumHousesStrategy3(int n, vector<vector<int>> &houseAvailability) {
-
-}
-
 int main() {
     // Taking user input for availability of painter and the total number of houses
-    int n = 7, m = 8;
+    int n = 9, m = 9;
 //    cout << "Enter the value of painter Availability: "; cin >> n;
 //    cout << "Enter the number of houses present: "; cin >> m;
 
     // Taking user input for the availability times of houses when they can be painted
 //    cout << "Enter the start and end house availability paint dates in each line: " << endl;
     vector<vector<int>> houseAvailability(m, vector<int> (2));
-    houseAvailability = {{1,7}, {1,8}, {2,3}, {2,4}, {2,8}, {3,4}, {4, 5}, {5, 6}};
+    houseAvailability = {{1,10},{1,7}, {1,8}, {2,3}, {2,4}, {2,8}, {3,4}, {4, 5}, {5, 6}};
 
     /* Uncomment it after code completion
     for(int i = 0; i < m; i++) {
