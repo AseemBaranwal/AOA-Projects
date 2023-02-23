@@ -106,7 +106,7 @@ vector<int> maximumHousesStrategy2(int n, vector<vector<int>> &houseAvailability
     }
 
     // Finally sorting the resultant index array for sequential way
-    sort(res.begin(), res.end());
+//    sort(res.begin(), res.end());
     return res;
 }
 
@@ -147,7 +147,7 @@ vector<int> maximumHousesStrategy3(int n, vector<vector<int>> &houseAvailability
     }
 
     // Finally sorting the resultant index array for sequential way
-    sort(res.begin(), res.end());
+//    sort(res.begin(), res.end());
     return res;
 }
 
@@ -190,54 +190,58 @@ vector<int> maximumHousesStrategy4(int n, vector<vector<int>> &houseAvailability
     }
 
     // Finally sorting the resultant index array for sequential way
-    sort(res.begin(), res.end());
+//    sort(res.begin(), res.end());
     return res;
 }
 
 int main() {
     // Taking user input for availability of painter and the total number of houses
-    int n, m;
-    cout << "Enter the value of painter Availability: "; cin >> n;
-    cout << "Enter the number of houses present: "; cin >> m;
+//    ios_base::sync_with_stdio(false);
+//    cin.tie(NULL);
+//    cout.tie(NULL);
 
-    // Taking user input for the availability times of houses when they can be painted
-    cout << "Enter the start and end house availability paint dates in each line: " << endl;
-    vector<vector<int>> houseAvailability(m, vector<int> (2));
-    houseAvailability = {{1,10},{1,7}, {1,8}, {2,3}, {2,4}, {2,8}, {3,4}, {4, 5}, {5, 6}};
+    int t; cin >> t;
+    while(t--){
+        int n, m;
+        cin >> n >> m;
+
+        // Taking user input for the availability times of houses when they can be painted
+        vector<vector<int>> houseAvailability(m, vector<int> (2));
+//    houseAvailability = {{10,4},{1,1}, {1,8}, {2,3}, {2,4}, {2,8}, {3,4}, {4, 5}, {5, 6}};
 
 //    Uncomment code below after code completion
-    for(int i = 0; i < m; i++) {
-        cin >> houseAvailability[i][0] >> houseAvailability[i][1];
+        for(int i = 0; i < m; i++) {
+            cin >> houseAvailability[i][0] >> houseAvailability[i][1];
+        }
+
+        // Result of strategy 1 below
+        vector<int> res = maximumHousesStrategy1(n, houseAvailability);
+        cout << "Indexes returned by strategy 1: ";
+        for (int &re: res)
+            cout << re << " ";
+        cout << endl;
+
+        // Result of strategy 2 below
+        res = maximumHousesStrategy2(n, houseAvailability);
+        cout << "Indexes returned by strategy 2: ";
+        for (int &re: res)
+            cout << re << " ";
+        cout << endl;
+
+        // Result of strategy 3 below
+        res = maximumHousesStrategy3(n, houseAvailability);
+        cout << "Indexes returned by strategy 3: ";
+        for (int &re: res)
+            cout << re << " ";
+        cout << endl;
+
+        // Result of strategy 4 below
+        res = maximumHousesStrategy4(n, houseAvailability);
+        cout << "Indexes returned by strategy 4: ";
+        for (int &re: res)
+            cout << re << " ";
+        cout << endl << endl;
     }
-
-    // Result of strategy 1 below
-    vector<int> res = maximumHousesStrategy1(n, houseAvailability);
-    cout << "Indexes returned by strategy 1: ";
-    for (int &re: res)
-        cout << re << " ";
-    cout << endl;
-
-    // Result of strategy 2 below
-    res = maximumHousesStrategy2(n, houseAvailability);
-    cout << "Indexes returned by strategy 2: ";
-    for (int &re: res)
-        cout << re << " ";
-    cout << endl;
-
-    // Result of strategy 3 below
-    res = maximumHousesStrategy3(n, houseAvailability);
-    cout << "Indexes returned by strategy 3: ";
-    for (int &re: res)
-        cout << re << " ";
-    cout << endl;
-
-    // Result of strategy 4 below
-    res = maximumHousesStrategy4(n, houseAvailability);
-    cout << "Indexes returned by strategy 4: ";
-    for (int &re: res)
-        cout << re << " ";
-    cout << endl;
-
-    cout << "Correct Greedy Strategy is Strategy 4";
+//    cout << "Correct Greedy Strategy is Strategy 4";
     return 0;
 }
