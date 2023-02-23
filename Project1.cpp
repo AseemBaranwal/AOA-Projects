@@ -218,7 +218,6 @@ int main() {
 
         // Taking user input for the availability times of houses when they can be painted
         vector<vector<int>> houseAvailability(m, vector<int> (2));
-//    houseAvailability = {{10,4},{1,1}, {1,8}, {2,3}, {2,4}, {2,8}, {3,4}, {4, 5}, {5, 6}};
 
 //    Uncomment code below after code completion
         for(int i = 0; i < m; i++) {
