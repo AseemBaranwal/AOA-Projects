@@ -52,20 +52,30 @@ vector<int> maximumHousesStrategy1(int n, vector<vector<int>> &houseAvailability
     // The function sorts the houses in increasing order of their start times and gives an output accordingly
     // Given that the houses are already sorted according to their start dates so no sorting is required
 
+    // Using indexes to keep track of duplicated testcase {{1,2}, {1,2}}
+    for(int i = 0; i < (int)houseAvailability.size(); i++){
+        houseAvailability[i].push_back(i+1);
+    }
+
     vector<int> res;
-    int i = 0, firstAvailableDay = 1;
-    while(i < houseAvailability.size() and houseAvailability[i][0] <= firstAvailableDay){
-        if(firstAvailableDay <= houseAvailability[i][1]){
-            res.push_back(i+1); // 1-indexing system
 
-            // handling of non-overlapping intervals
-            firstAvailableDay = max(houseAvailability[i][0], firstAvailableDay) + 1;
-
-            // if the available days for the painter are over, they can no longer paint any more houses and hence we end the loop.
-            if(firstAvailableDay > n)
-                break;
+    // Using a Queue to make sure that we use a complexity of O(N)
+    queue<vector<int>> Q;
+    int idx = 0;
+    for(int currentDay = 1; currentDay <= n; currentDay++){
+        // Pushing all the houses which can be done till currentDay in the queue
+        while(idx < houseAvailability.size() and houseAvailability[idx][0] <= currentDay){
+            Q.push(houseAvailability[idx]);
+            idx++;
         }
-        i++;
+
+        // Popping all houses which don't satisfy the criteria
+        while(!Q.empty() and Q.front()[1] < currentDay) Q.pop();
+        if(Q.empty()) continue;
+
+        // Adding the value of 1-based index to the result and popping the current Value out
+        res.push_back(Q.front()[2]);
+        Q.pop();
     }
     return res;
 }
@@ -196,12 +206,13 @@ vector<int> maximumHousesStrategy4(int n, vector<vector<int>> &houseAvailability
 
 int main() {
     // Taking user input for availability of painter and the total number of houses
-//    ios_base::sync_with_stdio(false);
-//    cin.tie(NULL);
-//    cout.tie(NULL);
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     int t; cin >> t;
-    while(t--){
+    for(int tc = 1; tc <= t; tc++){
+        cout << tc << endl;
         int n, m;
         cin >> n >> m;
 
