@@ -206,9 +206,9 @@ vector<int> maximumHousesStrategy4(int n, vector<vector<int>> &houseAvailability
 
 int main() {
     // Taking user input for availability of painter and the total number of houses
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+//    ios_base::sync_with_stdio(false);
+//    cin.tie(nullptr);
+//    cout.tie(nullptr);
 
     int t; cin >> t;
     for(int tc = 1; tc <= t; tc++){
