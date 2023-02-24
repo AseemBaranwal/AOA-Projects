@@ -1,11 +1,11 @@
 import random
 
-t = 10
+t = 1000
 file = open('testCases.txt', 'w')
 file.write(str(t) + "\n")
 for i in range(1, t + 1):
-    n = random.randint(1, 10)
-    m = random.randint(1, 10)
+    n = random.randint(1, 500)
+    m = random.randint(1, 400)
     file.write(str(n) + "\n")
     file.write(str(m) + "\n")
     j = i
