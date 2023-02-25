@@ -22,7 +22,7 @@ public:
     }
 };
 
-vector<int> maximumHousesStrategy2(int n, vector<vector<int>> &houseAvailability) {
+vector<int> maximumHousesStrategy2(int n, vector<vector<int> > &houseAvailability) {
     // The function selects the first house available to be painted that day having the maximum start time
 
     // Using indexes to keep track of duplicated testcase {{1,2}, {1,2}}
@@ -30,7 +30,7 @@ vector<int> maximumHousesStrategy2(int n, vector<vector<int>> &houseAvailability
         houseAvailability[i].push_back(i+1);
     }
 
-    priority_queue<vector<int>, vector<vector<int>>, sortLatestStartDay> pq;
+    priority_queue<vector<int>, vector<vector<int> >, sortLatestStartDay> pq;
 
     // Variables to keep track of last executed job and resultant answer
     int idx = 0;
@@ -64,7 +64,7 @@ int main() {
     int n, m; cin >> n >> m;
 
     // Taking user input for the availability times of houses when they can be painted
-    vector<vector<int>> houseAvailability(m, vector<int> (2));
+    vector<vector<int> > houseAvailability(m, vector<int> (2));
 
     for(int i = 0; i < m; i++) {
         cin >> houseAvailability[i][0] >> houseAvailability[i][1];

@@ -59,7 +59,7 @@ vector<int> maximumHousesStrategy1(int n, vector<vector<int>> houseAvailability)
 
     vector<int> res;
 
-    // Using a Queue to make sure that we use a complexity of O(N)
+    // Using a Queue to Makefile sure that we use a complexity of O(N)
     queue<vector<int>> Q;
     int idx = 0;
     for(int currentDay = 1; currentDay <= n; currentDay++){

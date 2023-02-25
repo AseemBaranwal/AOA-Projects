@@ -8,7 +8,7 @@
 #include <queue>
 
 using namespace  std;
-vector<int> maximumHousesStrategy1(int n, vector<vector<int>> &houseAvailability) {
+vector<int> maximumHousesStrategy1(int n, vector<vector<int> > &houseAvailability) {
     // The function sorts the houses in increasing order of their start times and gives an output accordingly
     // Given that the houses are already sorted according to their start dates so no sorting is required
 
@@ -19,8 +19,8 @@ vector<int> maximumHousesStrategy1(int n, vector<vector<int>> &houseAvailability
 
     vector<int> res;
 
-    // Using a Queue to make sure that we use a complexity of O(N)
-    queue<vector<int>> Q;
+    // Using a Queue to Makefile sure that we use a complexity of O(N)
+    queue<vector<int> > Q;
     int idx = 0;
     for(int currentDay = 1; currentDay <= n; currentDay++){
         // Pushing all the houses which can be done till currentDay in the queue
@@ -45,7 +45,7 @@ int main() {
     int n, m; cin >> n >> m;
 
     // Taking user input for the availability times of houses when they can be painted
-    vector<vector<int>> houseAvailability(m, vector<int> (2));
+    vector<vector<int> > houseAvailability(m, vector<int> (2));
 
     for(int i = 0; i < m; i++) {
         cin >> houseAvailability[i][0] >> houseAvailability[i][1];
@@ -53,7 +53,7 @@ int main() {
 
     // Result of strategy 1 below
     vector<int> res = maximumHousesStrategy1(n, houseAvailability);
-    for (int &re: res)
-        cout << re << " ";
+    for (int i = 0; i < (int)res.size(); i++)
+        cout << res[i] << " ";
     return 0;
 }

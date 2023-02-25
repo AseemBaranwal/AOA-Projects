@@ -4,17 +4,11 @@
 CC=g++
 CFLAGS=-c -Wall
 
-# Source Files
-SRCS=run1.cpp run2.cpp run3.cpp run4.cpp
-
-# Object Files
-OBJS=$(SRCS:.cpp=.o)
-
 # Targets
 all: run1 run2 run3 run4
 
-run1: run1.o
-	$(CC) $(CFLAGS) -o run1 run1.o
+run1: run1.cpp
+	$(CC) $(CFLAGS) -o run1 run1.cpp
 	./run1
 
 run2: run2.o
@@ -29,23 +23,7 @@ run4: run4.o
 	$(CC) $(CFLAGS) -o run4 run4.o
 	./run4
 
-# Object files
-run1.o: run1.cpp
-	$(CC) $(CFLAGS) -c run1.cpp
-
-run2.o: run2.cpp
-	$(CC) $(CFLAGS) -c run2.cpp
-
-run3.o: run3.cpp
-	$(CC) $(CFLAGS) -c run3.cpp
-
-run4.o: run4.cpp
-	$(CC) $(CFLAGS) -c run4.cpp
-
-# Object file rules
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
-
 # Clean up
+.PHONY:clean
 clean:
-	rm -f *.o run1 run2
+	rm -f run1 run2
