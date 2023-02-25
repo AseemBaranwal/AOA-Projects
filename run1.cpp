@@ -53,7 +53,7 @@ int main() {
 
     // Result of strategy 1 below
     vector<int> res = maximumHousesStrategy1(n, houseAvailability);
-    for (int i = 0; i < (int)res.size(); i++)
-        cout << res[i] << " ";
+    for (int &re: res)
+        cout << re << " ";
     return 0;
 }

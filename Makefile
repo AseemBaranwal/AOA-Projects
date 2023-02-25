@@ -2,28 +2,34 @@
 
 # Compiler Settings
 CC=g++
-CFLAGS=-c -Wall
+CFLAGS=-std=c++11
 
 # Targets
+default: clean
+
 all: run1 run2 run3 run4
 
 run1: run1.cpp
 	$(CC) $(CFLAGS) -o run1 run1.cpp
 	./run1
 
-run2: run2.o
-	$(CC) $(CFLAGS) -o run2 run2.o
+run2: run2.cpp
+	$(CC) $(CFLAGS) -o run2 run2.cpp
 	./run2
 
-run3: run3.o
-	$(CC) $(CFLAGS) -o run3 run3.o
+run3: run3.cpp
+	$(CC) $(CFLAGS) -o run3 run3.cpp
 	./run3
 
-run4: run4.o
-	$(CC) $(CFLAGS) -o run4 run4.o
+run4: run4.cpp
+	$(CC) $(CFLAGS) -o run4 run4.cpp
 	./run4
+
+run5: run5.cpp
+	$(CC) $(CFLAGS) -o run5 run5.cpp
+	./run5
 
 # Clean up
 .PHONY:clean
 clean:
-	rm -f run1 run2
+	rm -rf run1 run2 run3 run4 run5

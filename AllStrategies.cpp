@@ -305,14 +305,14 @@ int main() {
         // Result of strategy 4 below
         vector<int> res1 = maximumHousesStrategy4(n, houseAvailability);
 //        cout << "Indexes returned by strategy 4: ";
-//        for (int &re: res)
+//        for (int &re: res1)
 //            cout << re << " ";
 //        cout << endl;
 
         // Result of strategy 5 below
         vector<int> res2 = maximumHousesStrategy5(n, houseAvailability);
 //        cout << "Indexes returned by strategy 5: ";
-//        for (int &re: res)
+//        for (int &re2: res)
 //            cout << re << " ";
 //        cout << endl << endl;
         if(res1.size() == res2.size()){
