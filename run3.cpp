@@ -20,7 +20,7 @@ public:
     }
 };
 
-vector<int> maximumHousesStrategy3(int n, vector<vector<int>> &houseAvailability) {
+vector<int> maximumHousesStrategy3(int n, vector<vector<int> > &houseAvailability) {
     // The function selects the first house available to be painted that day having the shortest duration
 
     // Using indexes to keep track of duplicated testcase {{1,2}, {1,2}}

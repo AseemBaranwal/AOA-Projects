@@ -20,7 +20,7 @@ public:
     }
 };
 
-vector<int> maximumHousesStrategy5(int n, vector<vector<int>> &houseAvailability) {
+vector<int> maximumHousesStrategy5(int n, vector<vector<int> > &houseAvailability) {
     // The function gets all the houses who have an availability at a given day and then selects the houses having the minimum Ending time
 
     // Using indexes to keep track of duplicated testcase {{1,2}, {1,2}}
