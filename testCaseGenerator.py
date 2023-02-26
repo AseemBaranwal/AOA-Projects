@@ -1,20 +1,20 @@
 import random
 
-t = 1000
+t = 1
 file = open('testCases.txt', 'w')
 file.write(str(t) + "\n")
-for i in range(1, t + 1):
-    n = random.randint(1, 500)
-    m = random.randint(1, 400)
+for tc in range(1, t + 1):
+    n = random.randint(1, 4000)
+    m = random.randint(1, 4000)
     file.write(str(n) + "\n")
     file.write(str(m) + "\n")
-    j = i
+    j = tc
     lst = []
-    for j in range(i, i + m):
-        startHouse = random.randint(1, i + m)
-        endHouse = random.randint(1, i + m)
+    for j in range(tc, tc + m):
+        startHouse = random.randint(1, tc + m)
+        endHouse = random.randint(1, tc + m)
         while endHouse == startHouse:
-            endHouse = random.randint(1, i + m)
+            endHouse = random.randint(1, tc + m)
         if startHouse > endHouse:
             startHouse, endHouse = endHouse, startHouse
         lst.append([startHouse, endHouse])

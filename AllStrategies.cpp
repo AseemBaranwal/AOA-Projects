@@ -14,8 +14,8 @@ public:
         // The third index signifies the index at which the particular house appears in original array
 
         // Sorted based on first part descending and second part ascending
-        if(v1[0] == v2[0])
-            return v1[1] > v2[1];
+//        if(v1[0] == v2[0])
+//            return v1[1] > v2[1];
         return v1[0] < v2[0];
     }
 };
@@ -28,8 +28,8 @@ public:
         // The third index signifies the index at which the particular house appears in original array
 
         // sorted based on ascending duration and ascending end date
-        if(v1[1] - v1[0] == v2[1] - v2[0])
-            return v1[1] > v2[1];
+//        if(v1[1] - v1[0] == v2[1] - v2[0])
+//            return v1[1] > v2[1];
         return v1[1] - v1[0] > v2[1] - v2[0];
     }
 };
@@ -42,8 +42,8 @@ public:
         // The third index signifies the index at which the particular house appears in original array
 
         // sorted based on the smallest ending times and then indices
-        if(v1[1] == v2[1])
-            return v1[2] > v2[2];
+//        if(v1[1] == v2[1])
+//            return v1[2] > v2[2];
         return v1[1] > v2[1];
     }
 };
@@ -269,65 +269,69 @@ int main() {
 
     int t; cin >> t;
     for(int tc = 1; tc <= t; tc++){
-//        cout << tc << endl;
+        cout << tc << endl;
         int n, m;
         cin >> n >> m;
 
         // Taking user input for the availability times of houses when they can be painted
         vector<vector<int>> houseAvailability(m, vector<int> (2));
 
-//    Uncomment code below after code completion
         for(int i = 0; i < m; i++) {
             cin >> houseAvailability[i][0] >> houseAvailability[i][1];
         }
 
         // Result of strategy 1 below
-//        vector<int> res = maximumHousesStrategy1(n, houseAvailability);
-//        cout << "Indexes returned by strategy 1: ";
-//        for (int &re: res)
-//            cout << re << " ";
-//        cout << endl;
-//
-//        // Result of strategy 2 below
-//        res = maximumHousesStrategy2(n, houseAvailability);
-//        cout << "Indexes returned by strategy 2: ";
-//        for (int &re: res)
-//            cout << re << " ";
-//        cout << endl;
-//
-//        // Result of strategy 3 below
-//        res = maximumHousesStrategy3(n, houseAvailability);
-//        cout << "Indexes returned by strategy 3: ";
-//        for (int &re: res)
-//            cout << re << " ";
-//        cout << endl;
+        vector<int> res = maximumHousesStrategy1(n, houseAvailability);
+        cout << "Count by Strategy 1: " << res.size() << endl;
+        cout << "Indexes returned by strategy 1: ";
+        for (int &re: res)
+            cout << re << " ";
+        cout << endl;
+
+        // Result of strategy 2 below
+        res = maximumHousesStrategy2(n, houseAvailability);
+        cout << "Count by Strategy 2: " << res.size() << endl;
+        cout << "Indexes returned by strategy 2: ";
+        for (int &re: res)
+            cout << re << " ";
+        cout << endl;
+
+        // Result of strategy 3 below
+        res = maximumHousesStrategy3(n, houseAvailability);
+        cout << "Count by Strategy 3: " << res.size() << endl;
+        cout << "Indexes returned by strategy 3: ";
+        for (int &re: res)
+            cout << re << " ";
+        cout << endl;
 
         // Result of strategy 4 below
         vector<int> res1 = maximumHousesStrategy4(n, houseAvailability);
-//        cout << "Indexes returned by strategy 4: ";
-//        for (int &re: res1)
-//            cout << re << " ";
-//        cout << endl;
+        cout << "Count by Strategy 4: " << res1.size() << endl;
+        cout << "Indexes returned by strategy 4: ";
+        for (int &re: res1)
+            cout << re << " ";
+        cout << endl;
 
         // Result of strategy 5 below
         vector<int> res2 = maximumHousesStrategy5(n, houseAvailability);
-//        cout << "Indexes returned by strategy 5: ";
-//        for (int &re2: res)
-//            cout << re << " ";
-//        cout << endl << endl;
-        if(res1.size() == res2.size()){
-            for(int i = 0; i < res1.size(); i++){
-                if(res1[i] != res2[i]){
+        cout << "Count by Strategy 5: " << res2.size() << endl;
+        cout << "Indexes returned by strategy 5: ";
+        for (int &re: res2)
+            cout << re << " ";
+        cout << endl << endl;
+//        if(res1.size() == res2.size()){
+//            for(int i = 0; i < res1.size(); i++){
+//                if(res1[i] != res2[i]){
 //                    cout << "Difference at " << i << " Str4 gives " << res1[i] << " Str5 gives " << res2[i] << endl;
-                    cout << t << endl;
-                    break;
-                }
-            }
-        }else{
+//                    cout << t << endl;
+//                    break;
+//                }
+//            }
+//        }else{
 //            cout << "Different sizes" << endl;
-            cout << t << endl;
-            continue;
-        }
+//            cout << t << endl;
+//            continue;
+//        }
     }
     return 0;
 }
