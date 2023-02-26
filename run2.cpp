@@ -15,9 +15,7 @@ public:
         // First index signifies the start date, second index signifies the end date
         // The third index signifies the index at which the particular house appears in original array
 
-        // Sorted based on first part descending and second part ascending
-        if(v1[0] == v2[0])
-            return v1[1] > v2[1];
+        // Sorted based on first part descending based on latest start day
         return v1[0] < v2[0];
     }
 };

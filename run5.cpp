@@ -15,9 +15,7 @@ public:
         // First index signifies the start date, second index signifies the end date
         // The third index signifies the index at which the particular house appears in original array
 
-        // sorted based on the smallest ending times and then indices
-        if(v1[1] == v2[1])
-            return v1[2] > v2[2];
+        // sorted based on the smallest ending times to paint house that will stop being available the earliest
         return v1[1] > v2[1];
     }
 };

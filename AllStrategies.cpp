@@ -13,9 +13,7 @@ public:
         // First index signifies the start date, second index signifies the end date
         // The third index signifies the index at which the particular house appears in original array
 
-        // Sorted based on first part descending and second part ascending
-//        if(v1[0] == v2[0])
-//            return v1[1] > v2[1];
+        // Sorted based on first part descending based on latest start day
         return v1[0] < v2[0];
     }
 };
@@ -27,23 +25,19 @@ public:
         // First index signifies the start date, second index signifies the end date
         // The third index signifies the index at which the particular house appears in original array
 
-        // sorted based on ascending duration and ascending end date
-//        if(v1[1] - v1[0] == v2[1] - v2[0])
-//            return v1[1] > v2[1];
+        // sorted based on ascending duration which is difference of end day and start day
         return v1[1] - v1[0] > v2[1] - v2[0];
     }
 };
 
-// Custom Sort function for the strategy 4
+// Custom Sort function for the strategy 4 & 5
 class sortSmallestEndDay{
 public:
     bool operator() (vector<int> &v1, vector<int> &v2){
         // First index signifies the start date, second index signifies the end date
         // The third index signifies the index at which the particular house appears in original array
 
-        // sorted based on the smallest ending times and then indices
-//        if(v1[1] == v2[1])
-//            return v1[2] > v2[2];
+        // sorted based on the smallest ending times to paint house that will stop being available the earliest
         return v1[1] > v2[1];
     }
 };
